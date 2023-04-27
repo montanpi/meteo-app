@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core'
-import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { MatAutocompleteModule } from '@angular/material/autocomplete'
+import { MatInputModule } from '@angular/material/input'
+import { MatIconModule } from '@angular/material/icon'
+import { MatButtonModule } from '@angular/material/button'
+import { MatSelectModule } from '@angular/material/select'
 
 @NgModule({
   declarations: [],
-  exports: [MatProgressBarModule],
+  exports: [MatAutocompleteModule, MatInputModule, MatIconModule, MatButtonModule, MatSelectModule],
 })
 export class MaterialModule {}
