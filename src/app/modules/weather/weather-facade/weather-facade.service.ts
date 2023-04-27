@@ -59,9 +59,10 @@ export class WeatherFacadeService {
   }
 
   async getWeatherByGeolocation(): Promise<void> {
-    const latitude = 0
-    const longitude = 0
-    const wd = await this._currentWeatherProvider.getWeatherData(latitude, longitude)
-    this._weatherData$.next(wd)
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
+        this.getWeatherByCoordinates(latitude, longitude)
+      })
+    }
   }
 }
