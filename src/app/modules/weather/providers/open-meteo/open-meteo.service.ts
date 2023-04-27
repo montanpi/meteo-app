@@ -33,7 +33,7 @@ function weatherDataAdapter(openMeteoWeatherData: OpenMeteoWeatherData): Weather
     longitude,
     timezone,
     elevation,
-    current_weather: { weathercode, temperature, windspeed, winddirection },
+    current_weather: { weathercode, temperature, windspeed, winddirection, is_day },
     daily,
     hourly,
   } = openMeteoWeatherData
@@ -51,7 +51,8 @@ function weatherDataAdapter(openMeteoWeatherData: OpenMeteoWeatherData): Weather
       sunrise: formatToLocalTime(daily.sunrise[0], timezone),
       sunset: formatToLocalTime(daily.sunset[0], timezone),
       temperature: temperature.toFixed(),
-      weatherCode: weathercode.toString(),
+      weather: weatherFrom[weathercode],
+      weatherImageUrl: imageUrlFrom(weathercode, is_day),
       windDirection: winddirection.toFixed(),
       windSpeed: windspeed.toFixed(),
     },
@@ -59,13 +60,81 @@ function weatherDataAdapter(openMeteoWeatherData: OpenMeteoWeatherData): Weather
       max: daily.temperature_2m_max[i].toFixed(),
       min: daily.temperature_2m_min[i].toFixed(),
       weekDay: formatToLocalTime(daily.time[i], timezone, 'cccc'),
-      weatherCode: weathercode.toString(),
+      weather: weatherFrom[daily.weathercode[i]],
     })),
     hourly: Array.from(new Array(24), (_, i) => ({
       temperature: hourly.temperature_2m[i + offset].toFixed(),
       time: formatToLocalTime(hourly.time[i + offset], timezone),
-      weatherCode: hourly.weathercode[i + offset].toString(),
+      weatherImageUrl: imageUrlFrom(hourly.weathercode[i + offset], is_day),
     })),
   }
   return adapted
+}
+
+// https://open-meteo.com/en/docs
+const weatherFrom: { [key: number]: string } = {
+  0: 'Clear sky',
+  1: 'Mainly clear',
+  2: 'Partly cloudy',
+  3: 'Overcast',
+  45: 'Fog',
+  48: 'Depositing rime fog',
+  51: 'Light drizzle',
+  53: 'Moderate drizzle',
+  55: 'Dense drizzle',
+  56: 'Light freezing drizzle',
+  57: 'Dense freezing drizzle',
+  61: 'Slight rain',
+  63: 'Moderate rain',
+  65: 'Heavy rain',
+  66: 'Freezing rain',
+  67: 'Heavy freezing rain',
+  71: 'Snow',
+  73: 'Moderate snow',
+  75: 'Heavy snow',
+  77: 'Snow grains',
+  80: 'Rain showers',
+  81: 'Moderate rain showers',
+  82: 'Violent rain showers',
+  85: 'Snow showers',
+  86: 'Heavy snow showers',
+  95: 'Thunderstorm',
+  96: 'Thunderstorm with slight hail',
+  99: 'Thunderstorm with heavy hail',
+}
+
+function imageUrlFrom(weathercode: number, is_day: number): string {
+  return `https://openweathermap.org/img/wn/${iconFrom[weathercode]}${is_day ? 'd' : 'n'}.png`
+}
+
+// https://open-meteo.com/en/docs
+const iconFrom: { [key: number]: string } = {
+  0: '01',
+  1: '02',
+  2: '03',
+  3: '04',
+  45: '50',
+  48: '50',
+  51: '09',
+  53: '09',
+  55: '09',
+  56: '13',
+  57: '13',
+  61: '10',
+  63: '10',
+  65: '10',
+  66: '13',
+  67: '13',
+  71: '13',
+  73: '13',
+  75: '13',
+  77: '13',
+  80: '09',
+  81: '09',
+  82: '09',
+  85: '13',
+  86: '13',
+  95: '11',
+  96: '11',
+  99: '11',
 }

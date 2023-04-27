@@ -1,6 +1,7 @@
 interface CurrentWeatherData {
   temperature: string
-  weatherCode: string
+  weather: string
+  weatherImageUrl: string
   sunrise: string
   sunset: string
   feelLike: string
@@ -15,13 +16,13 @@ interface DailyWeatherData {
   weekDay: string
   min: string
   max: string
-  weatherCode: string
+  weather: string
 }
 
 interface HourlyWeatherData {
   time: string
   temperature: string
-  weatherCode: string
+  weatherImageUrl: string
 }
 
 export interface WeatherData {

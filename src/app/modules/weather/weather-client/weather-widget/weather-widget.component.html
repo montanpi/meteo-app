@@ -1,14 +1,19 @@
 <ng-container *ngIf="weatherData">
   <mat-card class="card">
     <mat-card-header>
-      <div [style.background-image]="weatherImageUrl" mat-card-avatar class="weather-header-image"></div>
+      <div [style.background-image]="'url(' + weatherData.current.weatherImageUrl + ')'" mat-card-avatar class="weather-header-image"></div>
       <mat-card-title>{{ weatherData.current.temperature }}°C</mat-card-title>
-      <mat-card-subtitle>{{ weatherData.current.weatherCode }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ weatherData.current.weather }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <div class="daily" *ngFor="let day of weatherData.daily">
-        <div>{{ day.weekDay }} - {{ day.weatherCode }}</div>
-        <div>{{ day.min }}°C / {{ day.max }}°C</div>
+        <div class="daily-row">
+          <div>
+            <img [src]="weatherData.current.weatherImageUrl" />
+          </div>
+          <div>{{ day.weekDay }}・{{ day.weather }}</div>
+          <div>&nbsp;{{ day.min }}°C / {{ day.max }}°C</div>
+        </div>
       </div>
     </mat-card-content>
   </mat-card>
@@ -18,7 +23,9 @@
       <div class="hourly-slider">
         <div class="hourly" *ngFor="let hour of weatherData.hourly">
           <div>{{ hour.time }}</div>
-          <div>{{ hour.weatherCode }}</div>
+          <div>
+            <img [src]="hour.weatherImageUrl" />
+          </div>
           <div>{{ hour.temperature }}°C</div>
         </div>
       </div>
