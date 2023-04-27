@@ -1,2 +1,22 @@
-<p>weather-client works!</p>
-<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+<mat-form-field appearance="fill">
+  <mat-label>Weather provider</mat-label>
+  <mat-select [(value)]="currentWeatherProvider" (selectionChange)="onWeatherProviderSelectionChange($event.value)">
+    <mat-option *ngFor="let weatherProvider of weatherProviders" [value]="weatherProvider">
+      {{ weatherProvider }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<app-location-search (locationSelected)="onLocationSelected($event)"></app-location-search>
+
+<button
+  mat-fab
+  matTooltip="Search by browser location"
+  color="primary"
+  aria-label="Search by browser location"
+  (click)="onGeolocationButtonClick()"
+>
+  <mat-icon>my_location</mat-icon>
+</button>
+
+<div>{{ weatherData$ | async | json }}</div>

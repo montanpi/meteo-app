@@ -37,7 +37,7 @@ export const mockWeatherData: WeatherData = {
 
 export class MockWeatherProvider implements WeatherProvider {
   name = 'mock'
-  getWeatherData() {
+  getWeatherData(): WeatherData {
     return mockWeatherData
   }
 }
