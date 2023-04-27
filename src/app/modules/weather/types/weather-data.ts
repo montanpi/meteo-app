@@ -1,32 +1,35 @@
+interface CurrentWeatherData {
+  temperature: string
+  weatherCode: string
+  sunrise: string
+  sunset: string
+  feelLike: string
+  chanceOfRain: string
+  windSpeed: string
+  windDirection: string
+  humidity: string
+  pressure: string
+}
+
+interface DailyWeatherData {
+  weekDay: string
+  min: string
+  max: string
+  weatherCode: string
+}
+
+interface HourlyWeatherData {
+  time: string
+  temperature: string
+  weatherCode: string
+}
+
 export interface WeatherData {
   latitude: string
   longitude: string
   timezone: string
-  timezoneAbbreviation: string | null
-  elevation: string | null
-  current: {
-    temperature: string
-    weatherCode: string
-    sunrise: Date
-    sunset: Date
-    feelLike: string | null
-    chanceOfRain: string | null
-    windSpeed: string
-    windDirection: string | null
-    humidity: string | null
-    pressure: string | null
-  }
-  daily: [
-    {
-      min: string
-      max: string
-      weatherCode: string
-    },
-  ]
-  hourly: [
-    {
-      temperature: string
-      weatherCode: string
-    },
-  ]
+  elevation: string
+  current: CurrentWeatherData
+  daily: DailyWeatherData[]
+  hourly: HourlyWeatherData[]
 }

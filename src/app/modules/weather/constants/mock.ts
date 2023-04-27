@@ -6,13 +6,12 @@ export const mockWeatherData: WeatherData = {
   latitude: '43.05',
   longitude: '12.55',
   timezone: 'Europe/Rome',
-  timezoneAbbreviation: 'CEST',
   elevation: '199.0',
   current: {
     temperature: '15', // deg C
     weatherCode: '100',
-    sunrise: new Date(1682482275000), // in local time, unix ms
-    sunset: new Date(1682482275000), // in local time, unix ms
+    sunrise: '06:00', // in local time, hh:mm
+    sunset: '20:00', // in local time, hh:mm
     feelLike: '14.0', // deg C
     chanceOfRain: '42', // %
     windSpeed: '3.4', // km/h
@@ -22,6 +21,7 @@ export const mockWeatherData: WeatherData = {
   },
   daily: [
     {
+      weekDay: 'Monday',
       min: '10',
       max: '20',
       weatherCode: '100',
@@ -29,6 +29,7 @@ export const mockWeatherData: WeatherData = {
   ],
   hourly: [
     {
+      time: '20:00',
       temperature: '20',
       weatherCode: '100',
     },
@@ -37,7 +38,7 @@ export const mockWeatherData: WeatherData = {
 
 export class MockWeatherProvider implements WeatherProvider {
   name = 'mock'
-  getWeatherData(): WeatherData {
+  async getWeatherData(): Promise<WeatherData> {
     return mockWeatherData
   }
 }

@@ -9,7 +9,7 @@ import { WeatherProvider } from 'src/app/modules/weather/types/weather-provider'
 export class OpenweathermapService implements WeatherProvider {
   name = 'openweathermap'
 
-  getWeatherData(): WeatherData {
+  async getWeatherData(): Promise<WeatherData> {
     return mockWeatherData
   }
 }
