@@ -61,6 +61,7 @@ function weatherDataAdapter(openMeteoWeatherData: OpenMeteoWeatherData): Weather
       min: daily.temperature_2m_min[i].toFixed(),
       weekDay: formatToLocalTime(daily.time[i], timezone, 'cccc'),
       weather: weatherFrom[daily.weathercode[i]],
+      weatherImageUrl: imageUrlFrom(daily.weathercode[i], is_day),
     })),
     hourly: Array.from(new Array(24), (_, i) => ({
       temperature: hourly.temperature_2m[i + offset].toFixed(),

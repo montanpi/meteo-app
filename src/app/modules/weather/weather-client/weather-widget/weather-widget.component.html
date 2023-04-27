@@ -9,7 +9,7 @@
       <div class="daily" *ngFor="let day of weatherData.daily">
         <div class="daily-row">
           <div>
-            <img [src]="weatherData.current.weatherImageUrl" />
+            <img [src]="day.weatherImageUrl" />
           </div>
           <div>{{ day.weekDay }}・{{ day.weather }}</div>
           <div>&nbsp;{{ day.min }}°C / {{ day.max }}°C</div>
