@@ -34,14 +34,15 @@ export class WeatherFacadeService {
     }
   }
 
-  getWeatherByCoordinates(latitude: number, longitude: number): void {
-    console.warn(latitude, longitude)
-    const wd = this._currentWeatherProvider.getWeatherData()
+  async getWeatherByCoordinates(latitude: number, longitude: number): Promise<void> {
+    const wd = await this._currentWeatherProvider.getWeatherData(latitude, longitude)
     this._weatherData$.next(wd)
   }
 
-  getWeatherByGeolocation(): void {
-    const wd = this._currentWeatherProvider.getWeatherData()
+  async getWeatherByGeolocation(): Promise<void> {
+    const latitude = 0
+    const longitude = 0
+    const wd = await this._currentWeatherProvider.getWeatherData(latitude, longitude)
     this._weatherData$.next(wd)
   }
 }
