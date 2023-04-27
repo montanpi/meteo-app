@@ -8,6 +8,9 @@
   </div>
 
   <div class="separator"></div>
+  <mat-spinner *ngIf="loading$ | async" class="spinner"></mat-spinner>
+  <div *ngIf="error$ | async" class="spinner">An error occurred. Please try again later</div>
+  <div class="separator"></div>
 
   <div class="footer">
     <mat-form-field appearance="fill">

@@ -13,11 +13,15 @@ export class WeatherClientComponent {
   weatherProviders: string[]
   currentWeatherProvider: string
   weatherData$: Observable<WeatherData | null>
+  loading$: Observable<boolean>
+  error$: Observable<boolean>
 
   constructor(private readonly weatherFacade: WeatherFacadeService) {
     this.weatherProviders = this.weatherFacade.weatherProviders
     this.currentWeatherProvider = this.weatherFacade.currentWeatherProvider
     this.weatherData$ = this.weatherFacade.weatherData$
+    this.loading$ = this.weatherFacade.loading$
+    this.error$ = this.weatherFacade.error$
   }
 
   onWeatherProviderSelectionChange(weatherProvider: string): void {

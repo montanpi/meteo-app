@@ -14,8 +14,8 @@
 }
 
 .weather-widget-container {
-    padding: 1em;
-    overflow: auto;
+  padding: 1em;
+  overflow: auto;
 }
 
 .separator {
@@ -25,4 +25,8 @@
 .footer {
   display: flex;
   justify-content: space-between;
+}
+
+.spinner {
+  margin: 0 auto;
 }
