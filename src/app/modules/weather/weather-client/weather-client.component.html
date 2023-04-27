@@ -1,22 +1,33 @@
-<mat-form-field appearance="fill">
-  <mat-label>Weather provider</mat-label>
-  <mat-select [(value)]="currentWeatherProvider" (selectionChange)="onWeatherProviderSelectionChange($event.value)">
-    <mat-option *ngFor="let weatherProvider of weatherProviders" [value]="weatherProvider">
-      {{ weatherProvider }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<div class="client-container">
+  <div class="location-search-container">
+    <app-location-search (locationSelected)="onLocationSelected($event)"></app-location-search>
+  </div>
 
-<app-location-search (locationSelected)="onLocationSelected($event)"></app-location-search>
+  <div class="weather-widget-container" *ngIf="weatherData$ | async as weatherData">
+    <app-weather-widget [weatherData]="weatherData"></app-weather-widget>
+  </div>
 
-<button
-  mat-fab
-  matTooltip="Search by browser location"
-  color="primary"
-  aria-label="Search by browser location"
-  (click)="onGeolocationButtonClick()"
->
-  <mat-icon>my_location</mat-icon>
-</button>
+  <div class="separator"></div>
 
-<div>{{ weatherData$ | async | json }}</div>
+  <div class="footer">
+    <mat-form-field appearance="fill">
+      <mat-label>Weather provider</mat-label>
+      <mat-select [(value)]="currentWeatherProvider" (selectionChange)="onWeatherProviderSelectionChange($event.value)">
+        <mat-option *ngFor="let weatherProvider of weatherProviders" [value]="weatherProvider">
+          {{ weatherProvider }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button
+      mat-fab
+      matTooltip="Search by browser location"
+      color="primary"
+      aria-label="Search by browser location"
+      class="geolocation-button"
+      (click)="onGeolocationButtonClick()"
+    >
+      <mat-icon>my_location</mat-icon>
+    </button>
+  </div>
+</div>

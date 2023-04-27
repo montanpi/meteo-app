@@ -4,13 +4,14 @@ import { WeatherRoutingModule } from './weather-routing.module'
 import { WeatherClientComponent } from 'src/app/modules/weather/weather-client/weather-client.component'
 import { MaterialModule } from 'src/app/modules/material'
 import { CommonModule } from '@angular/common'
-import { WEATHER_PROVIDER } from './constants'
+import { WEATHER_PROVIDER } from './shared'
 import { OpenMeteoService } from './providers/open-meteo/open-meteo.service'
 import { WeatherFacadeService } from 'src/app/modules/weather/weather-facade/weather-facade.service'
 import { OpenweathermapService } from 'src/app/modules/weather/providers/openweathermap/openweathermap.service'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'
 import { LocationSearchComponent } from './weather-client/location-search/location-search.component'
+import { WeatherWidgetComponent } from './weather-client/weather-widget/weather-widget.component'
 
 @NgModule({
   imports: [CommonModule, WeatherRoutingModule, MaterialModule, FormsModule, ReactiveFormsModule, HttpClientModule],
@@ -19,6 +20,6 @@ import { LocationSearchComponent } from './weather-client/location-search/locati
     { provide: WEATHER_PROVIDER, useClass: OpenweathermapService, multi: true },
     WeatherFacadeService,
   ],
-  declarations: [WeatherClientComponent, LocationSearchComponent],
+  declarations: [WeatherClientComponent, LocationSearchComponent, WeatherWidgetComponent],
 })
 export class WeatherModule {}

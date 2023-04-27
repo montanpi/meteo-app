@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { mockWeatherData } from 'src/app/modules/weather/constants'
+import { mockWeatherData } from 'src/app/modules/weather/shared'
 import { WeatherData } from 'src/app/modules/weather/types/weather-data'
 import { WeatherProvider } from 'src/app/modules/weather/types/weather-provider'
 
