@@ -1,0 +1,66 @@
+<ng-container *ngIf="weatherData">
+  <mat-card class="card">
+    <mat-card-header>
+      <div [style.background-image]="weatherImageUrl" mat-card-avatar class="weather-header-image"></div>
+      <mat-card-title>{{ weatherData.current.temperature }}°C</mat-card-title>
+      <mat-card-subtitle>{{ weatherData.current.weatherCode }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="daily" *ngFor="let day of weatherData.daily">
+        <div>{{ day.weekDay }} - {{ day.weatherCode }}</div>
+        <div>{{ day.min }}°C / {{ day.max }}°C</div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card">
+    <mat-card-content>
+      <div class="hourly-slider">
+        <div class="hourly" *ngFor="let hour of weatherData.hourly">
+          <div>{{ hour.time }}</div>
+          <div>{{ hour.weatherCode }}</div>
+          <div>{{ hour.temperature }}°C</div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card">
+    <mat-card-content>
+      <div class="details-container">
+        <div>Sunrise {{ weatherData.current.sunrise }}</div>
+        <div>Sunset {{ weatherData.current.sunset }}</div>
+        <div>
+          <div class="detail-container">
+            <div>Feel like</div>
+            <div>{{ weatherData.current.feelLike }}</div>
+          </div>
+          <div class="detail-container">
+            <div>Chance of rain</div>
+            <div>{{ weatherData.current.chanceOfRain }}</div>
+          </div>
+        </div>
+        <div>
+          <div class="detail-container">
+            <div>Humidity</div>
+            <div>{{ weatherData.current.humidity }}</div>
+          </div>
+          <div class="detail-container">
+            <div>Pressure</div>
+            <div>{{ weatherData.current.pressure }}</div>
+          </div>
+        </div>
+        <div>
+          <div class="detail-container">
+            <div>Wind speed</div>
+            <div>{{ weatherData.current.windSpeed }}</div>
+          </div>
+          <div class="detail-container">
+            <div>Wind direction</div>
+            <div>{{ weatherData.current.windDirection }}</div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

@@ -26,8 +26,75 @@ export const mockWeatherData: WeatherData = {
       max: '20',
       weatherCode: '100',
     },
+    {
+      weekDay: 'Monday',
+      min: '10',
+      max: '20',
+      weatherCode: '100',
+    },
+    {
+      weekDay: 'Monday',
+      min: '10',
+      max: '20',
+      weatherCode: '100',
+    },
   ],
   hourly: [
+    {
+      time: '20:00',
+      temperature: '20',
+      weatherCode: '100',
+    },
+    {
+      time: '20:00',
+      temperature: '20',
+      weatherCode: '100',
+    },
+    {
+      time: '20:00',
+      temperature: '20',
+      weatherCode: '100',
+    },
+    {
+      time: '20:00',
+      temperature: '20',
+      weatherCode: '100',
+    },
+    {
+      time: '20:00',
+      temperature: '20',
+      weatherCode: '100',
+    },
+    {
+      time: '20:00',
+      temperature: '20',
+      weatherCode: '100',
+    },
+    {
+      time: '20:00',
+      temperature: '20',
+      weatherCode: '100',
+    },
+    {
+      time: '20:00',
+      temperature: '20',
+      weatherCode: '100',
+    },
+    {
+      time: '20:00',
+      temperature: '20',
+      weatherCode: '100',
+    },
+    {
+      time: '20:00',
+      temperature: '20',
+      weatherCode: '100',
+    },
+    {
+      time: '20:00',
+      temperature: '20',
+      weatherCode: '100',
+    },
     {
       time: '20:00',
       temperature: '20',

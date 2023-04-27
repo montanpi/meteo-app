@@ -1,0 +1,40 @@
+.daily {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+
+.card {
+  max-width: 400px;
+  margin: 2em auto 0;
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.weather-header-image {
+  background-size: cover;
+}
+
+.hourly-slider {
+  overflow: auto;
+  display: flex;
+  & > div:not(:first-child) {
+    margin-left: 2em;
+  }
+}
+
+.hourly {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.detail-container {
+  display: inline-block;
+  width: 50%;
+  margin-top: 0.5em;
+  &:first-child {
+    margin-top: 0;
+  }
+}

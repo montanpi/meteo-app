@@ -1,0 +1,28 @@
+.client-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 1em;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.location-search-container {
+  width: 343px;
+  align-self: center;
+}
+
+.weather-widget-container {
+    padding: 1em;
+    overflow: auto;
+}
+
+.separator {
+  flex-grow: 1;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}

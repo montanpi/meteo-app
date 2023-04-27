@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing'
 
 import { WeatherFacadeService } from './weather-facade.service'
-import { WEATHER_PROVIDER, MockWeatherProvider } from '../constants'
+import { WEATHER_PROVIDER, MockWeatherProvider } from '../shared'
 
 describe('WeatherFacadeService', () => {
   let service: WeatherFacadeService

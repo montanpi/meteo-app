@@ -1,9 +1,9 @@
-<mat-form-field>
+<mat-form-field class="form-field">
   <input matInput [(ngModel)]="location" [matAutocomplete]="auto" [formControl]="formControl" placeholder="Search location" />
   <button *ngIf="location" matSuffix mat-icon-button aria-label="Clear" (click)="clearSelection()">
     <mat-icon>close</mat-icon>
   </button>
-  <mat-autocomplete [panelWidth]="400" #auto="matAutocomplete" (optionSelected)="onSelected()" [displayWith]="displayWith">
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected()" [displayWith]="displayWith">
     <mat-option *ngIf="loading">Loading…</mat-option>
     <ng-container *ngIf="!loading">
       <mat-option *ngFor="let location of filteredLocations" [value]="location">

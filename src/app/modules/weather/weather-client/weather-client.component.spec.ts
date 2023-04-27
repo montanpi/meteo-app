@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { WeatherClientComponent } from './weather-client.component'
 import { WeatherFacadeService } from 'src/app/modules/weather/weather-facade/weather-facade.service'
-import { MockWeatherFacade } from 'src/app/modules/weather/constants'
+import { MockWeatherFacade } from 'src/app/modules/weather/shared'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
 describe('WeatherClientComponent', () => {
