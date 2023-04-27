@@ -17,6 +17,7 @@ interface DailyWeatherData {
   min: string
   max: string
   weather: string
+  weatherImageUrl: string
 }
 
 interface HourlyWeatherData {

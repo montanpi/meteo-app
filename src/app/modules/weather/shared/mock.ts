@@ -26,6 +26,7 @@ export const mockWeatherData: WeatherData = {
       min: '10',
       max: '20',
       weather: '100',
+      weatherImageUrl: 'weatherImageUrl',
     },
   ],
   hourly: [
