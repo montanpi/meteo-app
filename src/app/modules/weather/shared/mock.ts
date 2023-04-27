@@ -9,7 +9,8 @@ export const mockWeatherData: WeatherData = {
   elevation: '199.0',
   current: {
     temperature: '15', // deg C
-    weatherCode: '100',
+    weather: '100',
+    weatherImageUrl: 'https://openweathermap.org/img/wn/01d.png',
     sunrise: '06:00', // in local time, hh:mm
     sunset: '20:00', // in local time, hh:mm
     feelLike: '14.0', // deg C
@@ -24,81 +25,14 @@ export const mockWeatherData: WeatherData = {
       weekDay: 'Monday',
       min: '10',
       max: '20',
-      weatherCode: '100',
-    },
-    {
-      weekDay: 'Monday',
-      min: '10',
-      max: '20',
-      weatherCode: '100',
-    },
-    {
-      weekDay: 'Monday',
-      min: '10',
-      max: '20',
-      weatherCode: '100',
+      weather: '100',
     },
   ],
   hourly: [
     {
       time: '20:00',
       temperature: '20',
-      weatherCode: '100',
-    },
-    {
-      time: '20:00',
-      temperature: '20',
-      weatherCode: '100',
-    },
-    {
-      time: '20:00',
-      temperature: '20',
-      weatherCode: '100',
-    },
-    {
-      time: '20:00',
-      temperature: '20',
-      weatherCode: '100',
-    },
-    {
-      time: '20:00',
-      temperature: '20',
-      weatherCode: '100',
-    },
-    {
-      time: '20:00',
-      temperature: '20',
-      weatherCode: '100',
-    },
-    {
-      time: '20:00',
-      temperature: '20',
-      weatherCode: '100',
-    },
-    {
-      time: '20:00',
-      temperature: '20',
-      weatherCode: '100',
-    },
-    {
-      time: '20:00',
-      temperature: '20',
-      weatherCode: '100',
-    },
-    {
-      time: '20:00',
-      temperature: '20',
-      weatherCode: '100',
-    },
-    {
-      time: '20:00',
-      temperature: '20',
-      weatherCode: '100',
-    },
-    {
-      time: '20:00',
-      temperature: '20',
-      weatherCode: '100',
+      weatherImageUrl: '100',
     },
   ],
 }
