@@ -1,13 +1,13 @@
 <mat-form-field class="form-field">
-  <input matInput [(ngModel)]="location" [matAutocomplete]="auto" [formControl]="formControl" placeholder="Search location" />
-  <button *ngIf="location" matSuffix mat-icon-button aria-label="Clear" (click)="clearSelection()">
+  <input matInput [matAutocomplete]="auto" [formControl]="formControl" placeholder="Search location" />
+  <button *ngIf="formControl.value" matSuffix mat-icon-button aria-label="Clear" (click)="clearSelection()">
     <mat-icon>close</mat-icon>
   </button>
-  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected()" [displayWith]="displayWith">
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onSelected($event.option.value)" [displayWith]="displayWith">
     <mat-option *ngIf="loading">Loading…</mat-option>
     <ng-container *ngIf="!loading">
       <mat-option *ngFor="let location of filteredLocations" [value]="location">
-        {{ location.name }} ({{ location.admin1 }}, {{ location.country }})
+        {{ location.name }} ({{ location.admin1 ? location.admin1 + ', ' : '' }}{{ location.country }})
       </mat-option>
     </ng-container>
   </mat-autocomplete>
