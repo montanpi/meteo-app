@@ -8,7 +8,7 @@ import { WeatherData } from 'src/app/modules/weather/types/weather-data'
 import { WeatherProvider } from 'src/app/modules/weather/types/weather-provider'
 import { DateTime } from 'luxon'
 
-const baseApiUrl =
+const apiUrl =
   'https://api.open-meteo.com/v1/forecast?hourly=temperature_2m,weathercode&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset&current_weather=true&timezone=auto&timeformat=unixtime'
 
 @Injectable({
@@ -21,12 +21,13 @@ export class OpenMeteoService implements WeatherProvider {
 
   async getWeatherData(latitude: number, longitude: number): Promise<WeatherData> {
     const openMeteoWeatherData = await firstValueFrom(
-      this.httpClient.get<OpenMeteoWeatherData>(`${baseApiUrl}&latitude=${latitude}&longitude=${longitude}`),
+      this.httpClient.get<OpenMeteoWeatherData>(`${apiUrl}&latitude=${latitude}&longitude=${longitude}`),
     )
     return weatherDataAdapter(openMeteoWeatherData)
   }
 }
 
+// https://open-meteo.com/en/docs
 function weatherDataAdapter(openMeteoWeatherData: OpenMeteoWeatherData): WeatherData {
   const {
     latitude,
@@ -42,7 +43,8 @@ function weatherDataAdapter(openMeteoWeatherData: OpenMeteoWeatherData): Weather
     latitude: latitude.toFixed(2),
     longitude: longitude.toFixed(2),
     timezone,
-    elevation: elevation.toFixed(),
+    // ideally units of measurement like meters, degrees, etc. would be formatted by pipes, not by the adapter
+    elevation: `${elevation.toFixed()}m`,
     current: {
       chanceOfRain: NOT_AVAILABLE,
       feelLike: NOT_AVAILABLE,
@@ -50,29 +52,29 @@ function weatherDataAdapter(openMeteoWeatherData: OpenMeteoWeatherData): Weather
       pressure: NOT_AVAILABLE,
       sunrise: formatToLocalTime(daily.sunrise[0], timezone),
       sunset: formatToLocalTime(daily.sunset[0], timezone),
-      temperature: temperature.toFixed(),
+      temperature: `${temperature.toFixed()}°C`,
       weather: weatherFrom[weathercode],
-      weatherImageUrl: imageUrlFrom(weathercode, is_day),
-      windDirection: winddirection.toFixed(),
-      windSpeed: windspeed.toFixed(),
+      weatherImageUrl: imageUrlFrom(weathercode, !!is_day),
+      windDirection: `${winddirection.toFixed()}°`,
+      windSpeed: `${windspeed.toFixed()}km/h`,
     },
     daily: Array.from(new Array(5), (_, i) => ({
-      max: daily.temperature_2m_max[i].toFixed(),
-      min: daily.temperature_2m_min[i].toFixed(),
+      max: `${daily.temperature_2m_max[i].toFixed()}°C`,
+      min: `${daily.temperature_2m_min[i].toFixed()}°C`,
       weekDay: formatToLocalTime(daily.time[i], timezone, 'cccc'),
       weather: weatherFrom[daily.weathercode[i]],
-      weatherImageUrl: imageUrlFrom(daily.weathercode[i], is_day),
+      weatherImageUrl: imageUrlFrom(daily.weathercode[i], true),
     })),
     hourly: Array.from(new Array(24), (_, i) => ({
-      temperature: hourly.temperature_2m[i + offset].toFixed(),
+      temperature: `${hourly.temperature_2m[i + offset].toFixed()}°C`,
       time: formatToLocalTime(hourly.time[i + offset], timezone),
-      weatherImageUrl: imageUrlFrom(hourly.weathercode[i + offset], is_day),
+      weatherImageUrl: imageUrlFrom(hourly.weathercode[i + offset], isDay(daily.sunrise, hourly.time[i + offset], daily.sunset, timezone)),
     })),
   }
   return adapted
 }
 
-// https://open-meteo.com/en/docs
+// https://open-meteo.com/en/docs WMO Weather interpretation codes (WW)
 const weatherFrom: { [key: number]: string } = {
   0: 'Clear sky',
   1: 'Mainly clear',
@@ -104,11 +106,37 @@ const weatherFrom: { [key: number]: string } = {
   99: 'Thunderstorm with heavy hail',
 }
 
-function imageUrlFrom(weathercode: number, is_day: number): string {
+/**
+ *      hourly
+ *      |
+ * |-------|----------|-------|-------|----------|-------|
+ * |       sunrise1   sunset1 |       sunrise2   sunset2 |
+ * 00:00                      00:00                      00:00
+ * hourly timestamps from 00:00 to 23:00
+ */
+/**
+ * isDay takes as input sunrise and sunset timestamps and checks if the hourly timestamp is within the daytime
+ * @param sunrises number[]
+ * @param hourly number[]
+ * @param sunsets number[]
+ * @param timezone string
+ * @returns boolean
+ */
+function isDay(sunrises: number[], hourly: number, sunsets: number[], timezone: string): boolean {
+  const hourlyTs = DateTime.fromSeconds(hourly).setZone(timezone).valueOf()
+  const sunrise1Ts = DateTime.fromSeconds(sunrises[0]).setZone(timezone).valueOf()
+  const sunset1Ts = DateTime.fromSeconds(sunsets[0]).setZone(timezone).valueOf()
+  const sunrise2Ts = DateTime.fromSeconds(sunrises[1]).setZone(timezone).valueOf()
+  const sunset2Ts = DateTime.fromSeconds(sunsets[1]).setZone(timezone).valueOf()
+  return (sunrise1Ts < hourlyTs && hourlyTs < sunset1Ts) || (sunrise2Ts < hourlyTs && hourlyTs < sunset2Ts)
+}
+
+// https://openweathermap.org/weather-conditions
+function imageUrlFrom(weathercode: number, is_day: boolean): string {
   return `https://openweathermap.org/img/wn/${iconFrom[weathercode]}${is_day ? 'd' : 'n'}.png`
 }
 
-// https://open-meteo.com/en/docs
+// matches open-meteo weather codes to openweathermap icons
 const iconFrom: { [key: number]: string } = {
   0: '01',
   1: '02',
