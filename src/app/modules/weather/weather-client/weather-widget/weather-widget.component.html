@@ -8,10 +8,8 @@
     <mat-card-content>
       <div class="daily" *ngFor="let day of weatherData.daily">
         <div class="daily-row">
-          <div>
-            <img [src]="day.weatherImageUrl" />
-          </div>
-          <div>{{ day.weekDay }}・{{ day.weather }}・</div>
+          <img [src]="day.weatherImageUrl" />
+          <div class="daily-weather">{{ day.weekDay }}・{{ day.weather }}</div>
           <div>{{ day.min }} / {{ day.max }}</div>
         </div>
       </div>
