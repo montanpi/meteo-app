@@ -15,37 +15,32 @@ export class LocationSearchComponent implements OnInit {
   formControl = new FormControl()
   filteredLocations: GeocodingLocation[] = []
   loading = false
-  location: GeocodingLocation | null = null
   @Output()
   locationSelected = new EventEmitter<GeocodingLocation>()
 
   constructor(private http: HttpClient) {}
 
-  onSelected(): void {
-    if (this.location != null) {
-      this.locationSelected.emit(this.location)
-    }
+  onSelected(location: GeocodingLocation): void {
+    this.locationSelected.emit(location)
   }
 
   displayWith(location: GeocodingLocation): string {
     if (location != null) {
       const { admin1, country, name } = location
-      return `${name} (${admin1}, ${country})`
+      return `${name} (${admin1 ? `${admin1}, ` : ''}${country})`
     }
     return ''
   }
 
   clearSelection(): void {
-    this.location = null
     this.filteredLocations = []
+    this.formControl.reset()
   }
 
   ngOnInit(): void {
     this.formControl.valueChanges
       .pipe(
-        filter((res) => {
-          return res !== null && res.length >= 3
-        }),
+        filter((value) => value && value.length > 1),
         distinctUntilChanged(),
         debounceTime(600),
         tap(() => {
