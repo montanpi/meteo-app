@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { WEATHER_PROVIDER } from 'src/app/modules/weather/shared'
-import { WeatherData } from 'src/app/modules/weather/types/weather-data'
-import { WeatherProvider } from 'src/app/modules/weather/types/weather-provider'
+import { WeatherData } from 'src/app/modules/weather/types'
+import { WeatherProvider } from 'src/app/modules/weather/types'
 
 @Injectable({
   providedIn: 'root',

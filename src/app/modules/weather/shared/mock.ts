@@ -1,5 +1,5 @@
-import { WeatherData } from 'src/app/modules/weather/types/weather-data'
-import { WeatherProvider } from '../types/weather-provider'
+import { WeatherData } from 'src/app/modules/weather/types'
+import { WeatherProvider } from '../types'
 import { WeatherFacadeService } from 'src/app/modules/weather/weather-facade/weather-facade.service'
 
 export const mockWeatherData: WeatherData = {

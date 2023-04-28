@@ -1,4 +1,4 @@
-import { GeocodingLocation } from 'src/app/modules/weather/weather-client/types/geocoding-location'
+import { GeocodingLocation } from 'src/app/modules/weather/weather-client/types'
 
 export interface GeocodingLocationResponse {
   results: GeocodingLocation[]

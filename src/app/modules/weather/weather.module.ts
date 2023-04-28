@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core'
 
 import { WeatherRoutingModule } from './weather-routing.module'
 import { WeatherClientComponent } from 'src/app/modules/weather/weather-client/weather-client.component'
-import { MaterialModule } from 'src/app/modules/material'
+import { MaterialModule } from 'src/app/modules/material/material.module'
 import { CommonModule } from '@angular/common'
 import { WEATHER_PROVIDER } from './shared'
 import { OpenMeteoService } from './providers/open-meteo/open-meteo.service'

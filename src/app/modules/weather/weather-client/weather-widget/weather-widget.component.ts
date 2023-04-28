@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core'
-import { WeatherData } from 'src/app/modules/weather/types/weather-data'
+import { WeatherData } from 'src/app/modules/weather/types'
 
 @Component({
   selector: 'app-weather-widget',
