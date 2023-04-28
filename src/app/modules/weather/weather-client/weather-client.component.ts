@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { Observable, Subject } from 'rxjs'
-import { WeatherData } from 'src/app/modules/weather/types/weather-data'
-import { GeocodingLocation } from 'src/app/modules/weather/weather-client/types/geocoding-location'
+import { WeatherData } from 'src/app/modules/weather/types'
+import { GeocodingLocation } from 'src/app/modules/weather/weather-client/types'
 import { WeatherFacadeService } from 'src/app/modules/weather/weather-facade/weather-facade.service'
 
 @Component({

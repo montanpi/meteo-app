@@ -3,8 +3,8 @@ import { FormControl } from '@angular/forms'
 import { HttpClient } from '@angular/common/http'
 
 import { debounceTime, tap, switchMap, finalize, distinctUntilChanged, filter, map, takeUntil, catchError } from 'rxjs/operators'
-import { GeocodingLocationResponse } from 'src/app/modules/weather/weather-client/types/geocoding-location-response'
-import { GeocodingLocation } from 'src/app/modules/weather/weather-client/types/geocoding-location'
+import { GeocodingLocationResponse } from 'src/app/modules/weather/weather-client/types'
+import { GeocodingLocation } from 'src/app/modules/weather/weather-client/types'
 import { Observable, Subject, of } from 'rxjs'
 
 @Component({

@@ -1,4 +1,4 @@
-import { WeatherData } from 'src/app/modules/weather/types/weather-data'
+import { WeatherData } from 'src/app/modules/weather/types'
 
 export interface WeatherProvider {
   name: string

@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core'
 import { firstValueFrom } from 'rxjs'
 import { OpenweathermapWeatherData } from 'src/app/modules/weather/providers/openweathermap/openweathermap-weather-data'
 import { NOT_AVAILABLE } from 'src/app/modules/weather/shared'
-import { formatLatitude, formatLongitude, formatToLocalTime } from 'src/app/modules/weather/shared/util'
-import { WeatherData } from 'src/app/modules/weather/types/weather-data'
-import { WeatherProvider } from 'src/app/modules/weather/types/weather-provider'
+import { formatLatitude, formatLongitude, formatToLocalTime } from 'src/app/modules/weather/shared'
+import { WeatherData } from 'src/app/modules/weather/types'
+import { WeatherProvider } from 'src/app/modules/weather/types'
 
 const apiUrl = 'https://api.openweathermap.org/data/2.5/onecall?units=metric&exclude=minutely,alerts'
 // normally I'd use environment files to manage api keys

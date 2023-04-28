@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { firstValueFrom } from 'rxjs'
 import { NOT_AVAILABLE } from 'src/app/modules/weather/shared'
-import { formatLatitude, formatLongitude, formatToLocalTime } from 'src/app/modules/weather/shared/util'
+import { formatLatitude, formatLongitude, formatToLocalTime } from 'src/app/modules/weather/shared'
 import { OpenMeteoWeatherData } from 'src/app/modules/weather/providers/open-meteo/open-meteo-weather-data'
-import { WeatherData } from 'src/app/modules/weather/types/weather-data'
-import { WeatherProvider } from 'src/app/modules/weather/types/weather-provider'
+import { WeatherData } from 'src/app/modules/weather/types'
+import { WeatherProvider } from 'src/app/modules/weather/types'
 import { DateTime } from 'luxon'
 
 const apiUrl =
