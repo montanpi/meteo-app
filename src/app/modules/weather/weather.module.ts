@@ -16,8 +16,8 @@ import { WeatherWidgetComponent } from './weather-client/weather-widget/weather-
 @NgModule({
   imports: [CommonModule, WeatherRoutingModule, MaterialModule, FormsModule, ReactiveFormsModule, HttpClientModule],
   providers: [
-    { provide: WEATHER_PROVIDER, useClass: OpenMeteoService, multi: true },
     { provide: WEATHER_PROVIDER, useClass: OpenweathermapService, multi: true },
+    { provide: WEATHER_PROVIDER, useClass: OpenMeteoService, multi: true },
     WeatherFacadeService,
   ],
   declarations: [WeatherClientComponent, LocationSearchComponent, WeatherWidgetComponent],

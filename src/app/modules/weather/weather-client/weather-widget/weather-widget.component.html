@@ -2,7 +2,7 @@
   <mat-card class="card">
     <mat-card-header>
       <div [style.background-image]="'url(' + weatherData.current.weatherImageUrl + ')'" mat-card-avatar class="weather-header-image"></div>
-      <mat-card-title>{{ weatherData.current.temperature }}°C</mat-card-title>
+      <mat-card-title>{{ weatherData.current.temperature }}</mat-card-title>
       <mat-card-subtitle>{{ weatherData.current.weather }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
@@ -12,7 +12,7 @@
             <img [src]="day.weatherImageUrl" />
           </div>
           <div>{{ day.weekDay }}・{{ day.weather }}・</div>
-          <div>{{ day.min }}°C / {{ day.max }}°C</div>
+          <div>{{ day.min }} / {{ day.max }}</div>
         </div>
       </div>
     </mat-card-content>
@@ -26,7 +26,7 @@
           <div>
             <img [src]="hour.weatherImageUrl" />
           </div>
-          <div>{{ hour.temperature }}°C</div>
+          <div>{{ hour.temperature }}</div>
         </div>
       </div>
     </mat-card-content>
