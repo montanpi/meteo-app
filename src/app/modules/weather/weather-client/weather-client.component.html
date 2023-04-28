@@ -1,6 +1,6 @@
 <div class="client-container">
   <div class="location-search-container">
-    <app-location-search (locationSelected)="onLocationSelected($event)"></app-location-search>
+    <app-location-search [clearSelection$]="clearLocation$" (locationSelected)="onLocationSelected($event)"></app-location-search>
   </div>
 
   <div class="weather-widget-container" *ngIf="weatherData$ | async as weatherData">
