@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core'
 import { firstValueFrom } from 'rxjs'
 import { OpenweathermapWeatherData } from 'src/app/modules/weather/providers/openweathermap/openweathermap-weather-data'
 import { NOT_AVAILABLE } from 'src/app/modules/weather/shared'
-import { formatToLocalTime } from 'src/app/modules/weather/shared/util'
+import { formatLatitude, formatLongitude, formatToLocalTime } from 'src/app/modules/weather/shared/util'
 import { WeatherData } from 'src/app/modules/weather/types/weather-data'
 import { WeatherProvider } from 'src/app/modules/weather/types/weather-provider'
 
@@ -48,23 +48,23 @@ function weatherDataAdapter(openweathermapWeatherData: OpenweathermapWeatherData
     hourly,
   } = openweathermapWeatherData
   const adapted: WeatherData = {
-    latitude: lat.toFixed(2),
-    longitude: lon.toFixed(2),
+    latitude: formatLatitude(lat),
+    longitude: formatLongitude(lon),
     timezone,
     elevation: NOT_AVAILABLE,
     current: {
       // ideally units of measurement like meters, degrees, etc. would be formatted by pipes, not by the adapter
       chanceOfRain: `${daily[0].pop.toFixed()}%`,
-      feelLike: `${feels_like.toFixed()}°C`,
+      feelsLike: `${feels_like.toFixed()}°C`,
       humidity: `${humidity}%`,
-      pressure: `${pressure}hPa`,
+      pressure: `${pressure} hPa`,
       sunrise: formatToLocalTime(sunrise, timezone),
       sunset: formatToLocalTime(sunset, timezone),
       temperature: `${temp.toFixed()}°C`,
       weather: currentWeather.main,
       weatherImageUrl: imageUrlFrom(currentWeather.icon),
       windDirection: `${wind_deg.toFixed()}°`,
-      windSpeed: `${wind_speed.toFixed()}km/h`,
+      windSpeed: `${wind_speed.toFixed()} km/h`,
     },
     daily: Array.from(new Array(5), (_, i) => ({
       max: `${daily[i].temp.max.toFixed()}°C`,

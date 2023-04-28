@@ -33,14 +33,18 @@
   </mat-card>
 
   <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title>{{ weatherData.latitude }}, {{ weatherData.longitude }}</mat-card-title>
+      <mat-card-subtitle>{{ weatherData.elevation }}</mat-card-subtitle>
+    </mat-card-header>
     <mat-card-content>
       <div class="details-container">
         <div>Sunrise {{ weatherData.current.sunrise }}</div>
         <div>Sunset {{ weatherData.current.sunset }}</div>
         <div>
           <div class="detail-container">
-            <div>Feel like</div>
-            <div>{{ weatherData.current.feelLike }}</div>
+            <div>Feels like</div>
+            <div>{{ weatherData.current.feelsLike }}</div>
           </div>
           <div class="detail-container">
             <div>Chance of rain</div>

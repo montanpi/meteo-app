@@ -4,7 +4,7 @@ interface CurrentWeatherData {
   weatherImageUrl: string
   sunrise: string
   sunset: string
-  feelLike: string
+  feelsLike: string
   chanceOfRain: string
   windSpeed: string
   windDirection: string
