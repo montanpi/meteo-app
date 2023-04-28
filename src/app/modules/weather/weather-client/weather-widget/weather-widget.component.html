@@ -39,8 +39,14 @@
     </mat-card-header>
     <mat-card-content>
       <div class="details-container">
-        <div>Sunrise {{ weatherData.current.sunrise }}</div>
-        <div>Sunset {{ weatherData.current.sunset }}</div>
+        <div class="detail-container">
+          <div>Sunrise</div>
+          <div>{{ weatherData.current.sunrise }}</div>
+        </div>
+        <div class="detail-container">
+          <div>Sunset</div>
+          <div>{{ weatherData.current.sunset }}</div>
+        </div>
         <div>
           <div class="detail-container">
             <div>Feels like</div>

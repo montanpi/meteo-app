@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { Observable } from 'rxjs'
+import { Observable, Subject } from 'rxjs'
 import { WeatherData } from 'src/app/modules/weather/types/weather-data'
 import { GeocodingLocation } from 'src/app/modules/weather/weather-client/types/geocoding-location'
 import { WeatherFacadeService } from 'src/app/modules/weather/weather-facade/weather-facade.service'
@@ -15,6 +15,8 @@ export class WeatherClientComponent {
   weatherData$: Observable<WeatherData | null>
   loading$: Observable<boolean>
   error$: Observable<boolean>
+  clearLocation$: Observable<void>
+  private _clearLocation$ = new Subject<void>()
 
   constructor(private readonly weatherFacade: WeatherFacadeService) {
     this.weatherProviders = this.weatherFacade.weatherProviders
@@ -22,6 +24,7 @@ export class WeatherClientComponent {
     this.weatherData$ = this.weatherFacade.weatherData$
     this.loading$ = this.weatherFacade.loading$
     this.error$ = this.weatherFacade.error$
+    this.clearLocation$ = this._clearLocation$.asObservable()
   }
 
   onWeatherProviderSelectionChange(weatherProvider: string): void {
@@ -34,6 +37,7 @@ export class WeatherClientComponent {
   }
 
   onGeolocationButtonClick(): void {
+    this._clearLocation$.next()
     this.weatherFacade.getWeatherByGeolocation()
   }
 }
