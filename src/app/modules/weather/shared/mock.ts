@@ -13,7 +13,7 @@ export const mockWeatherData: WeatherData = {
     weatherImageUrl: 'https://openweathermap.org/img/wn/01d.png',
     sunrise: '06:00', // in local time, hh:mm
     sunset: '20:00', // in local time, hh:mm
-    feelLike: '14.0', // deg C
+    feelsLike: '14.0', // deg C
     chanceOfRain: '42', // %
     windSpeed: '3.4', // km/h
     windDirection: '360', // deg

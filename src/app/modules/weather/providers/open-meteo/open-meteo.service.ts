@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { firstValueFrom } from 'rxjs'
 import { NOT_AVAILABLE } from 'src/app/modules/weather/shared'
-import { formatToLocalTime } from 'src/app/modules/weather/shared/util'
+import { formatLatitude, formatLongitude, formatToLocalTime } from 'src/app/modules/weather/shared/util'
 import { OpenMeteoWeatherData } from 'src/app/modules/weather/providers/open-meteo/open-meteo-weather-data'
 import { WeatherData } from 'src/app/modules/weather/types/weather-data'
 import { WeatherProvider } from 'src/app/modules/weather/types/weather-provider'
@@ -40,14 +40,14 @@ function weatherDataAdapter(openMeteoWeatherData: OpenMeteoWeatherData): Weather
   } = openMeteoWeatherData
   const offset = Number(DateTime.now().setZone(timezone).toFormat('H'))
   const adapted: WeatherData = {
-    latitude: latitude.toFixed(2),
-    longitude: longitude.toFixed(2),
+    latitude: formatLatitude(latitude),
+    longitude: formatLongitude(longitude),
     timezone,
     // ideally units of measurement like meters, degrees, etc. would be formatted by pipes, not by the adapter
-    elevation: `${elevation.toFixed()}m`,
+    elevation: `${elevation.toFixed()} m`,
     current: {
       chanceOfRain: NOT_AVAILABLE,
-      feelLike: NOT_AVAILABLE,
+      feelsLike: NOT_AVAILABLE,
       humidity: NOT_AVAILABLE,
       pressure: NOT_AVAILABLE,
       sunrise: formatToLocalTime(daily.sunrise[0], timezone),
@@ -56,7 +56,7 @@ function weatherDataAdapter(openMeteoWeatherData: OpenMeteoWeatherData): Weather
       weather: weatherFrom[weathercode],
       weatherImageUrl: imageUrlFrom(weathercode, !!is_day),
       windDirection: `${winddirection.toFixed()}°`,
-      windSpeed: `${windspeed.toFixed()}km/h`,
+      windSpeed: `${windspeed.toFixed()} km/h`,
     },
     daily: Array.from(new Array(5), (_, i) => ({
       max: `${daily.temperature_2m_max[i].toFixed()}°C`,
