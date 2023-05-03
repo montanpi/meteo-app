@@ -65,16 +65,16 @@ interface WeatherData {
 ' interface OpenMeteoWeatherData {}
 ' interface OpenweathermapData {}
 
-    ' OpenMeteoService --> OpenMeteoWeatherData : gets
-    ' OpenweathermapService --> OpenweathermapData : gets
+    ' OpenMeteoService ..> OpenMeteoWeatherData : gets
+    ' OpenweathermapService ..> OpenweathermapData : gets
     OpenMeteoService ..|> WeatherProvider
-    OpenMeteoService --> WeatherData : adapts to
-    OpenweathermapService --> WeatherData : adapts to
+    ' OpenMeteoService ..> WeatherData : adapts to
+    ' OpenweathermapService ..> WeatherData : adapts to
     OpenweathermapService ..|> WeatherProvider
-    WeatherFacade ..> "1..*" WeatherProvider
-    WeatherFacade --> WeatherData : returns
-    ' WeatherProvider --> WeatherData : returns
-    WeatherClient ..> WeatherFacade
+    WeatherFacade o-- "1..*" WeatherProvider
+    ' WeatherFacade ..> WeatherData
+    WeatherProvider ..> WeatherData
+    WeatherClient --> WeatherFacade
 @enduml
 ```
 
